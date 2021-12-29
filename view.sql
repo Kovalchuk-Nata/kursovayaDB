@@ -1,12 +1,19 @@
  -- view
-create view certificates as
-select certificate_zno.id, abiturient.Surname, abiturient.Name, abiturient.MiddleName,
- abiturient.Passport_Id as PassportId, avg(Grade) as CompetitiveScore
-	from certificate_zno
-	inner join abiturient on certificate_zno.Abiturient_Id = abiturient.Id
-	group by Passport_Id;  
+CREATE VIEW certificates AS
+    SELECT 
+        certificate_zno.id,
+        abiturient.Surname,
+        abiturient.Name,
+        abiturient.MiddleName,
+        abiturient.Passport_Id AS PassportId,
+        AVG(Grade) AS CompetitiveScore
+    FROM
+        certificate_zno
+            INNER JOIN
+        abiturient ON certificate_zno.Abiturient_Id = abiturient.Id
+    GROUP BY Passport_Id;  
 
-select * from certificates; -- 
+select * from certificates; -- вьюшка что считает конкурсный бал абитуриента
 
 create view abitForFICT as
 select application.Id, faculty.Abbreviation as Faculty, SpecialityId as Speciality, AbiturientId, CertificateId, certificates.CompetitiveScore,
@@ -21,3 +28,5 @@ eql.EQLName as EQL, form_of_education.FOE as FOE, form_of_payment_for_education.
  order by id;
  
  select * from abitForFICT; -- абитуриенты что подались на фиот
+ 
+ 

@@ -11,7 +11,7 @@ select * from privilege;
 select * from speciality;
 select * from subjects;
 
-/* -- зно предметы
+ -- зно предметы
 
 insert certificate_zno()
 values
@@ -105,7 +105,7 @@ values
 (28, 28, 4, 179),
 (28, 28, 2, 189),
 (28, 28, 13, 174);
-*/
+
 
 
 insert application()
@@ -141,3 +141,6 @@ values
 (26, 4, 113, 26, 26, 0, 1, 1, 3, 1),
 (27, 1, 121, 27, 27, 0, 1, 2, 2, 0),
 (28, 2, 113, 28, 28, 0, 2, 1, 3, 1);
+
+UPDATE `kursovayadb`.`speciality` SET `CompetitiveScore` = '189.9' WHERE (`Id` = '121') and (`Faculty_Id` = '1');
+UPDATE `kursovayadb`.`speciality` SET `CompetitiveScore` = '185.8' WHERE (`Id` = '123') and (`Faculty_Id` = '1');

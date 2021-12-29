@@ -1,4 +1,7 @@
+ 
  create database kursovayadb;
+ 
+ 
 use kursovayadb;
 
 create table privilege -- пільги
@@ -92,6 +95,7 @@ Id int not null, -- фк может добавить SpecialityCode int not null
 SpecialityName varchar(50) not null,
 Faculty_Id int not null,
 CompetitiveScore float not null,
+Number_of_places int,
 primary key(id, faculty_id),
 
 foreign key (Faculty_Id) references Faculty (Id) on delete cascade on update cascade
@@ -119,3 +123,10 @@ foreign key (FOEId) references form_of_education (Id) on delete cascade on updat
 foreign key (FOPFE) references form_of_payment_for_education (Id) on delete cascade on update cascade
 );
 
+alter table speciality
+add Number_of_places int default 120;
+
+ alter table abiturient
+ modify Sum_application int default 1;
+ update abiturient 
+set Sum_application =1;

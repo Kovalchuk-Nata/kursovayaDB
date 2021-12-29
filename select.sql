@@ -13,20 +13,34 @@ where Ab_Privilege is not null
 group by Privilege; 
 -- 2 выводим количество льготников по группам
 
-select  abiturient.id, Surname, Name, MiddleName, BirthDate, Passport_Id, Passport_Seria, Phone_number, City.CityName as City, Adress, School, Graduation_date,
-        privilege.PrivilegeDescritpion as Privilege
-        from abiturient
-        inner join City on city.Id = abiturient.Ab_City
-        inner join Privilege on privilege.Id = abiturient.Ab_Privilege; 
+SELECT 
+    abiturient.id,
+    Surname,
+    Name,
+    MiddleName,
+    BirthDate,
+    Passport_Id,
+    Passport_Seria,
+    Phone_number,
+    City.CityName AS City,
+    Adress,
+    School,
+    Graduation_date,
+    privilege.PrivilegeDescritpion AS Privilege
+FROM
+    abiturient
+        INNER JOIN
+    City ON city.Id = abiturient.Ab_City
+        INNER JOIN
+    Privilege ON privilege.Id = abiturient.Ab_Privilege; 
         -- 3 полная инфа по льготникам
         
  select certificate_zno.id, Abiturient_Id, subjects.SubjectName as subjects, Grade
 		from certificate_zno
  inner join subjects on certificate_zno.SubjectId = subjects.Id
  order by Abiturient_Id, SubjectId ; 
- -- 4 кто что сдавал + оценки      
-
-
+ -- 4 кто что сдавал + оценки 
+ 
 select certificate_zno.id, abiturient.Surname, abiturient.Name, abiturient.MiddleName, abiturient.Passport_Id as PassportId, avg(Grade) as CompetitiveScore
  from certificate_zno
  inner join abiturient on certificate_zno.Abiturient_Id = abiturient.Id
@@ -70,8 +84,16 @@ eql.EQLName as EQL, form_of_education.FOE as FOE, form_of_payment_for_education.
  order by  eql, foe;  
  -- 8 вывод только магистров
  
- select application.Id, faculty.Abbreviation as Faculty, SpecialityId as Speciality, AbiturientId, CertificateId, certificates.CompetitiveScore,
-eql.EQLName as EQL, form_of_education.FOE as FOE, form_of_payment_for_education.FOPFE as FOPFE
+SELECT 
+    application.Id,
+    faculty.Abbreviation AS Faculty,
+    SpecialityId AS Speciality,
+    AbiturientId,
+    CertificateId,
+    certificates.CompetitiveScore,
+    eql.EQLName AS EQL,
+    form_of_education.FOE AS FOE,
+    form_of_payment_for_education.FOPFE AS FOPFE
  from application
  inner join faculty on application.FacultyId = faculty.id
  inner join certificates on application.CertificateId = certificates.id
